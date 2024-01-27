@@ -1,12 +1,15 @@
 <script lang="ts">
+  let isRecording: Boolean = false;
   let mediaStream: MediaStream | undefined = undefined;
   let mediaRecorder: MediaRecorder | undefined = undefined;
   async function startRecording() {
+    isRecording = true;
     mediaStream = await navigator.mediaDevices.getDisplayMedia();
     mediaRecorder = new MediaRecorder(mediaStream);
     mediaRecorder.start();
   }
   async function stopRecording() {
+    isRecording = false;
     const videoTracks = mediaStream?.getVideoTracks();
     videoTracks?.[0]?.stop();
   }
@@ -26,4 +29,8 @@
   });
 </script>
 
-<button on:click={startRecording}> start Recording </button>
+{#if isRecording === false}
+  <button on:click={startRecording}> start Recording </button>
+{:else}
+  <button on:click={stopRecording}> stop Recording </button>
+{/if}
