@@ -15,15 +15,12 @@
   }
 
   $: mediaRecorder?.addEventListener("dataavailable", (event) => {
-    const fileName = prompt(
-      "Enter a name for your download file",
-      "capture.wem"
-    );
+    const fileName = prompt("Enter a name for your download file", "capture");
 
     if (fileName) {
       const link = document.createElement("a");
       link.href = URL.createObjectURL(event.data);
-      link.download = fileName;
+      link.download = fileName + ".webm";
       link.click();
     }
   });
