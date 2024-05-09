@@ -4,7 +4,9 @@
   let mediaRecorder: MediaRecorder | undefined = undefined;
   async function startRecording() {
     isRecording = true;
-    mediaStream = await navigator.mediaDevices.getDisplayMedia();
+    mediaStream = await navigator.mediaDevices.getDisplayMedia({
+     audio: true
+    });
     mediaRecorder = new MediaRecorder(mediaStream);
     mediaRecorder.start();
   }
