@@ -17,8 +17,9 @@
   }
   async function stopRecording() {
     isRecording = false;
-    const videoTracks = mediaStream?.getVideoTracks();
-    videoTracks?.[0]?.stop();
+   // const videoTracks = mediaStream?.getVideoTracks();
+   // videoTracks?.[0]?.stop();
+    mediaRecorder.stop();
   }
 
   $: mediaRecorder?.addEventListener("dataavailable", (event) => {
