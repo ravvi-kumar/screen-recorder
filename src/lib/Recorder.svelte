@@ -4,10 +4,15 @@
   let mediaRecorder: MediaRecorder | undefined = undefined;
   async function startRecording() {
     isRecording = true;
-    mediaStream = await navigator.mediaDevices.getDisplayMedia({
-     audio: true
-    });
-    mediaRecorder = new MediaRecorder(mediaStream);
+    mediaStream = await navigator.mediaDevices.getDisplayMedia();
+    let audioStream = await navigator.mediaDevices.getUserMedia({  
+            audio: true, video: false }) ;
+    let combine = new MediaStream( 
+            [...mediaStream.getTracks(), ...audioStream.getTracks()]) 
+  
+        /* Record the captured mediastream 
+           with MediaRecorder constructor */
+    mediaRecorder = new MediaRecorder(combine);
     mediaRecorder.start();
   }
   async function stopRecording() {
