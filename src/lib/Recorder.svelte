@@ -22,6 +22,8 @@
       link.href = URL.createObjectURL(event.data);
       link.download = fileName + ".webm";
       link.click();
+    } else {
+      alert("you didn't enter a name");
     }
   });
 </script>
